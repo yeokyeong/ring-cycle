@@ -1,0 +1,69 @@
+h3 {
+    font-size: 1.2rem;
+}
+
+h4,
+h5 {
+    font-size: 0.9rem;
+}
+
+h6 {
+    font-size: 0.8rem;
+    margin-bottom: 0.1rem;
+}
+
+p {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+
+}
+
+.input-group-sm {
+    width: 80%;
+}
+
+.input-group-sm.input-group__smaller {
+    width: 30%;
+}
+
+.input-group-sm>.form-control,
+.input-group-sm>.form-select,
+.input-group-sm>.input-group-text {
+    font-size: 0.8rem;
+}
+
+
+.input-group:not(.has-validation)> :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3) {
+    padding-right: 0.3rem;
+    padding-left: 0.3rem;
+}
+
+.input-group> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    padding-right: 0.3rem;
+    padding-left: 0.3rem;
+}
+.form-check{
+    font-size: 0.9rem;
+
+}
+
+.container__content{
+  background-color: cornsilk;
+  
+}
+
+.container__item{
+    margin-bottom: 10px;
+}
+.text--warning{
+    font-size: 0.7rem;
+    color: red;
+}
+
+.btn--delete{
+    padding: 0; width: 25px; height: 25px;
+}
+.text--preview{
+    background-color: white; padding-left: 5px;
+}

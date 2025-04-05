@@ -1,0 +1,11 @@
+{
+    "name": "Ring Cycle",
+    "version": "1.0.0",
+    "description": "Set custom alarm",
+    "manifest_version": 3,
+    "author": "Yeokyeong An",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Set custom various alarm"
+    }
+}
