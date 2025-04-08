@@ -1,7 +1,13 @@
 function main() {
-  // 알림 권한 요청
+  console.log("load main()");
+
+  //알림 권한 요청
   if (Notification.permission !== "granted") {
-    Notification.requestPermission();
+    Notification.requestPermission().then((permission) => {
+      if (permission !== "granted") {
+        alert("알림 권한이 필요합니다!");
+      }
+    });
   }
 
   // add listener
@@ -108,11 +114,13 @@ function main() {
 main();
 
 function showNotification(notiMsg) {
+if (Notification.permission === "granted") {
+    console.log("알람!!", notiMsg, Notification.permission);
+
   new Notification("🔔 RingCycle 알람", {
-    body: `설정된 시간이 되었어요!` + notiMsg,
+    body: `설정된 시간이 되었어요! \n` + notiMsg,
   });
-  //     if (Notification.permission === "granted") {
-  //   }
+  }
 }
 
 /* rendering */
