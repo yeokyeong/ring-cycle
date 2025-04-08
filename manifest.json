@@ -1,17 +1,22 @@
 {
-    "name": "Ring Cycle",
-    "version": "1.0.0",
-    "description": "Set custom alarm",
-    "manifest_version": 3,
-    "author": "Yeokyeong An",
-    "action":{
-        "default_popup": "index.html",
-        "default_title": "Set custom various alarm"
-    },
-    "icons": {
-        "16": "images/ring-cycle-logo_16.png",
-        "32": "images/ring-cycle-logo_32.png",
-        "48": "images/ring-cycle-logo_48.png",
-        "128": "images/ring-cycle-logo_128.png"
-      }
+  "name": "Ring Cycle",
+  "version": "1.0.0",
+  "description": "Set custom alarm",
+  "manifest_version": 3,
+  "author": "Yeokyeong An",
+  "action":{
+    "default_popup": "index.html",
+    "default_title": "Set custom various alarm"
+},
+  "icons": {
+    "16": "images/ring-cycle-logo_16.png",
+    "32": "images/ring-cycle-logo_32.png",
+    "48": "images/ring-cycle-logo_48.png",
+    "128": "images/ring-cycle-logo_128.png"
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "permissions": ["notifications", "alarms","scripting"]
 }
