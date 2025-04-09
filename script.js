@@ -5,9 +5,22 @@ function main() {
   // add listener
   document.getElementById("saveBtn").addEventListener("click", saveAlert);
   document.getElementById("deleteBtn").addEventListener("click", deleteAlert);
+
+  // for load pevious data if exists
+  document.addEventListener("DOMContentLoaded", async () => {
+    await setData();
+  });
 }
 
 main();
+
+async function setData() {
+  let result = await chrome.storage.sync.get("times");
+
+  if (result.times && result.times.length > 0) {
+    showPreview(result.times);
+  }
+}
 
 async function saveAlert() {
   console.log("save()");
@@ -23,7 +36,6 @@ async function saveAlert() {
 
   // get interval
   const intervalMinutes = document.getElementById("inputInterval").value;
-  //   const intervalMinutes = 1;
 
   console.log("start time", startHour, startMinutes, startMidday);
   console.log("end time", endHour, endMinutes, endMidday);
@@ -67,10 +79,15 @@ async function saveAlert() {
   if (isVaild) {
     alertList.push(filteredItems);
     hideWarning();
-    showPreview(filteredItems);
+
+    const timestamps = filteredItems.map((time) => time.getTime());
+    showPreview(timestamps);
+
+    await chrome.storage.sync.set({
+      times: timestamps,
+    });
     chrome.runtime.sendMessage({
       type: "SET_ALARMS",
-      times: filteredItems.map((time) => time.getTime()),
     });
   } else {
     showWarning();
@@ -78,7 +95,8 @@ async function saveAlert() {
 }
 
 //FIXME
-function deleteAlert() {
+async function deleteAlert() {
+  await chrome.storage.sync.clear();
   chrome.runtime.sendMessage({
     type: "REMOVE_ALARMS",
   });
@@ -88,15 +106,15 @@ function deleteAlert() {
 }
 
 /* rendering */
-function showPreview(filteredItems) {
+function showPreview(timestamps) {
   const previewRow = document.getElementById("preview-row");
   previewRow.classList.remove("d-none");
   previewRow.classList.add("d-flex");
 
   let times = "";
-  filteredItems.forEach((d, inx) => {
-    times += formatDate(d);
-    if (inx < filteredItems.length - 1) {
+  timestamps.forEach((d, inx) => {
+    times += formatDate(new Date(d));
+    if (inx < timestamps.length - 1) {
       times += ", ";
     }
   });

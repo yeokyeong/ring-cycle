@@ -6,7 +6,13 @@
   "author": "Yeokyeong An",
   "action":{
     "default_popup": "index.html",
-    "default_title": "Set custom various alarm"
+    "default_title": "Set custom various alarm",
+    "default_icon": {
+      "16": "images/ring-cycle-logo_16.png",
+      "32": "images/ring-cycle-logo_32.png",
+      "48": "images/ring-cycle-logo_48.png",
+      "128": "images/ring-cycle-logo_128.png"
+    }
 },
   "icons": {
     "16": "images/ring-cycle-logo_16.png",
@@ -18,5 +24,5 @@
     "service_worker": "service-worker.js",
     "type": "module"
   },
-  "permissions": ["notifications", "alarms","scripting"]
+  "permissions": ["notifications", "alarms","scripting", "storage"]
 }

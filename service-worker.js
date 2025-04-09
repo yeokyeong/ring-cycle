@@ -2,11 +2,17 @@ chrome.runtime.onInstalled.addListener(() => {
   console.info("RingCycle successfully installed");
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   if (message.type === "SET_ALARMS") {
-    message.times.forEach((timestamp, index) => {
-      chrome.alarms.create(`ringAlarm_${timestamp}`, { when: timestamp });
-    });
+    let result = await chrome.storage.sync.get("times");
+    const times = result.times;
+    try {
+      times.forEach((timestamp, index) => {
+        chrome.alarms.create(`ringAlarm_${timestamp}`, { when: timestamp });
+      });
+    } catch (error) {
+      console.error(error);
+    }
   } else if (message.type === "REMOVE_ALARMS") {
     chrome.alarms.clearAll();
   }
