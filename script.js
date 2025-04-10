@@ -130,12 +130,12 @@ function hidePreview() {
 
 function showWarning() {
   const previewRow = document.getElementById("warningText");
-  previewRow.classList.remove("d-none");
-  previewRow.classList.add("d-flex");
+  previewRow.classList.remove("invisible");
+  previewRow.classList.add("visible");
 }
 
 function hideWarning() {
   const previewRow = document.getElementById("warningText");
-  previewRow.classList.add("d-none");
-  previewRow.classList.remove("d-flex");
+  previewRow.classList.add("invisible");
+  previewRow.classList.remove("visible");
 }

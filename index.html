@@ -7,16 +7,15 @@
 </head>
 
 <body>
-    <div class="container pt-3 pb-3" style="width: 350px;">
-        <h3 class="text-center">🔔 Ring Cycle 🔔</h3>
-        <h4 class="text-center"> 알림 시작 시각과 반복 주기를 설정해보세요.</h4>
-
-        <div class="container p-2 mt-2 container__content">
-            <h5 class="">🕒 알림 시각 설정</h5>
-            <div class="container container__item">
-                <h6> - 알림 시작 시간 : </h6>
-                <p class="">첫 알람이 울릴 시간을 설정하세요. </p>
-                <div class="input-group input-group-sm">
+    <div class="popup mx-auto">
+        <h3>🔔 Ring Cycle 🔔</h3>
+        <h4>알림 시작 시각과 반복 주기를 설정해보세요.</h4>
+        <div class="section-box">
+            <h5>🕒 알림 시각 설정</h5>
+            <div>
+                <h6>- 알림 시작 시간 :</h6>
+                <p>첫 알람이 울릴 시간을 설정하세요.</p>
+                <div class="input-group input-group-sm mb-2">
                     <select class="form-select" id="inputStartHour">
                         <option value="00">00</option>
                         <option value="01">01</option>
@@ -48,9 +47,8 @@
                     </select>
                 </div>
 
-                <h6 class="mt-2 mb-2"> - 알림 종료 시간 : </h6>
-
-                <div class="input-group  input-group-sm  ">
+                <h6>- 알림 종료 시간 :</h6>
+                <div class="input-group input-group-sm">
                     <select class="form-select" id="inputEndHour">
                         <option value="00">00</option>
                         <option value="01">01</option>
@@ -81,24 +79,24 @@
                     </select>
                 </div>
             </div>
+        </div>
 
-            <h5 class="">🔁 반복 주기 설정</h5>
-            <div class="container container__item">
-                <p>몇 분마다 알람이 반복될지 선택하세요.</p>
-                <div class="input-group input-group-sm input-group__smaller">
-                    <!-- <input type="text" class="form-control" id="inputInterval" > -->
-                    <select class="form-select" id="inputInterval">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                        <option value="60" selected="selected">60</option>
-                    </select>
-                    <span class="input-group-text">분</span>
-                </div>
+        <div class="section-box">
+            <h5>🔁 반복 주기 설정</h5>
+            <p>몇 분마다 알람이 반복될지 선택하세요.</p>
+            <div class="input-group input-group-sm">
+                <select class="form-select" id="inputInterval">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60" selected>60</option>
+                </select>
+                <span class="input-group-text">분</span>
             </div>
-            <!-- <h5 class="">📣 (선택사항) 알림 방식</h5>
+        </div>
+        <!-- <h5 class="">📣 (선택사항) 알림 방식</h5>
                 <div class="container container__item" >
                     <p>알림이 표시되는 방식을 선택하세요.</p>
                     <div class="form-check form-check-inline">
@@ -115,31 +113,32 @@
                       </div>
                 </div> -->
 
-            <!-- <h5 class="">⛔️ (선택사항) 방해 금지 시간대 설정</h5>
+        <!-- <h5 class="">⛔️ (선택사항) 방해 금지 시간대 설정</h5>
                 <div class="container container__item" >
                     <p> 알람이 울리지 않을 시간을 설정할 수 있어요</p>
                 </div> -->
 
-            <div class="d-grid col-2 mx-auto">
-                <button class="btn btn-primary btn-sm" type="button" id="saveBtn">저장</button>
-            </div>
-            <p class="text-center text--warning mt-1 d-none" id="warningText">알림은 한개만 저장할수있어요. 저장된 알림을 삭제해주세요.</p>
-            <h5 class="">🔔 알림 미리보기 </h5>
-            <div class="container container__item">
-                <h6 class="mt-2 mb-2"> 예상 알림 시각</h6>
-                <div class="container">
-                    <div class="row d-none" id="preview-row">
-                        <div class="col col-1"><button class="btn btn-danger btn-sm btn--delete"
-                                type="button" id="deleteBtn">X</button>
-                        </div>
-                        <div class="col col-10">
-                            <div class="text--preview" id="preview-row__text">11:50, 12:50, 13:50...</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-sm" id="saveBtn">💾 저장</button>
+        </div>
+    <p class="text-center text-danger mt-1 mb-1 invisible" id="warningText">
+        알림은 한 개만 저장할 수 있어요. 저장된 알림을 삭제해주세요.
+    </p>
+        
+
+        <div class="section-box section-box--preview mb-0">
+            <h5>🔔 알림 미리보기</h5>
+            <h6>예상 알림 시각</h6>
+            <div class="d-flex align-items-center d-none mt-2" id="preview-row">
+                <button class="btn--delete" id="deleteBtn">삭제</button>
+                <div class="text--preview" id="preview-row__text">11:50, 12:50, 13:50...</div>
             </div>
         </div>
+
+
+    </div>
 </body>
 <script src="./script.js"></script>
 <script src="./format.js"></script>
+
 </html>
