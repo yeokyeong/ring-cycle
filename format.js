@@ -8,5 +8,10 @@ function convertTo24Hour(hour, midday) {
 }
 
 function formatDate(date) {
-  return [date.getHours(), date.getMinutes()].join(":");
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  return [
+    hour < 10 ? "0" + hour : hour,
+    minute < 10 ? "0" + minute : minute,
+  ].join(":");
 }
