@@ -18,6 +18,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   }
 });
 
+//TODO : show next alarm time
 chrome.alarms.onAlarm.addListener((alarm) => {
   chrome.notifications.create({
     type: "basic",
