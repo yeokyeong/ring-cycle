@@ -36,10 +36,6 @@ async function saveAlert() {
   // get interval
   const intervalMinutes = document.getElementById("inputInterval").value;
 
-  console.log("start time", startHour, startMinutes, startMidday);
-  console.log("end time", endHour, endMinutes, endMidday);
-  console.log("intervalMunutes", intervalMinutes);
-
   const now = new Date();
 
   const startDate = new Date(
