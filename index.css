@@ -7,9 +7,9 @@ body {
 
   .popup {
     width: 350px;
-    border-radius: 16px;
     background: white;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    /* border-radius: 16px; */
+    /* box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); */
     padding: 20px 18px;
   }
 
