@@ -1,7 +1,7 @@
 # 🔔 RingCycle - Custom Repeating Alarm Chrome Extension
 
 <p align="center">
-  <img src="./src/ring-cycle-logo_128.png" style="width:100px;"/>
+****  <img src="./src/ring-cycle-logo_128.png" style="width:100px;"/>
 </p>
 
 **RingCycle**은 사용자가 지정한 시작 시각부터 일정한 간격으로 알림을 받을 수 있도록 도와주는 **크롬 확장 프로그램**입니다.
