@@ -143,7 +143,6 @@ function showWarning(warningText) {
 
 function hideWarning() {
   const previewRow = document.getElementById("warningText");
-  previewRow.innerText = "";
   previewRow.classList.add("invisible");
   previewRow.classList.remove("visible");
 }
