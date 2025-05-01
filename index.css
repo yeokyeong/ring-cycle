@@ -35,10 +35,10 @@ body {
   }
 
   h4 {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     text-align: center;
-    margin-bottom: 0.8rem;
     color: #555;
+    line-height: 2;
   }
 
   h5 {
