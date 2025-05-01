@@ -2,6 +2,7 @@
 <html>
 <title>Ring Cycle</title>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
 <link href="./index.css" rel="stylesheet">
@@ -25,7 +26,7 @@
            
             <div class="time-picker-end--wrapper flex-container--col">
                 <h6>- 알림 종료 시간 :</h6>
-                <p>첫 알람이 울릴 시간을 설정하세요.</p>
+                <p>알람이 끝날 시간을 설정하세요.</p>
                 <div class="form-control time-input" id="time-picker-end"></div>
             </div>
         </div>
@@ -78,8 +79,7 @@
         </p>
 
         <div class="section-box section-box--preview mb-0">
-            <h5>🔔 알림 미리보기</h5>
-            <h6>예상 알림 시각</h6>
+            <h5>🔔 예상 알림 시각</h5>
             <div class="d-flex align-items-center d-none mt-2" id="preview-row">
                 <button class="btn--delete" id="deleteBtn">삭제</button>
                 <div class="text--preview" id="preview-row__text">11:50, 12:50, 13:50...</div>
@@ -88,8 +88,6 @@
 
     </div>
 </body>
-<script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
-<script src="./format.js"></script>
-<script src="./script.js"></script>
-
+<script src="./tui-time-picker.js"></script>
+<script type="module" src="./script.js"></script>
 </html>

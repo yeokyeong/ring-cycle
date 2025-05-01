@@ -1,38 +1,72 @@
+import { formatDate, getDateOnly } from "./format.js";
+import { testTimes, yesterdayTimestamp } from "./test/testData.js";
+
 // TODO : save multiple alerts
 let alertList = [];
+
+// set TimePicker
+const TimePicker = tui.TimePicker;
+
+const startTimeContainer = new TimePicker(
+  document.getElementById("time-picker-start"),
+  {
+    initialHour: 9,
+    initialMinute: 50,
+    inputType: "spinbox",
+    showMeridiem: false,
+  }
+);
+const endTimeContainer = new TimePicker(
+  document.getElementById("time-picker-end"),
+  {
+    initialHour: 18,
+    initialMinute: 50,
+    inputType: "spinbox",
+    showMeridiem: false,
+  }
+);
+
+main();
 
 function main() {
   // add listener
   document.getElementById("saveBtn").addEventListener("click", saveAlert);
   document.getElementById("deleteBtn").addEventListener("click", deleteAlert);
-
   // for load pevious data if exists
-  document.addEventListener("DOMContentLoaded", async () => {
-    await setData();
-  });
+  document.addEventListener("DOMContentLoaded", validateTodayAlertData);
 }
 
-main();
+async function validateTodayAlertData() {
+  const previousTimes = await getData();
 
-async function setData() {
-  let result = await chrome.storage.sync.get("times");
+  // 오늘 date까지만 가져옴
+  const now = new Date();
+  const todayDateOnly = getDateOnly(now.getTime());
 
-  if (result.times && result.times.length > 0) {
-    showPreview(result.times);
+  let previousDateOnly;
+  // 이전 데이터가 있으면 date까지만 가져옴
+  if (previousTimes.length > 0) {
+    previousDateOnly = getDateOnly(previousTimes[0]);
+  }
+  // 날짜 비교
+  if (todayDateOnly === previousDateOnly) {
+    await setData(previousTimes);
+  } else {
+    deleteAlert();
   }
 }
 
+async function getData() {
+  const result = await chrome.storage.local.get("times");
+  return result?.times || [];
+}
+
+async function setData(times) {
+  showPreview(times);
+  alertList.push(times);
+}
+
 async function saveAlert() {
-  // get start time
-  const startHour = document.getElementById("inputStartHour").value;
-  const startMinutes = document.getElementById("inputStartMinutes").value;
-  const startMidday = document.getElementById("inputStartMidday").value;
-
-  // get end time
-  const endHour = document.getElementById("inputEndHour").value;
-  const endMinutes = document.getElementById("inputEndMinutes").value;
-  const endMidday = document.getElementById("inputEndMidday").value;
-
   // get interval
   const intervalMinutes = document.getElementById("inputInterval").value;
 
@@ -42,16 +76,16 @@ async function saveAlert() {
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    convertTo24Hour(startHour, startMidday),
-    startMinutes
+    startTimeContainer.getHour(),
+    startTimeContainer.getMinute()
   );
 
   const endDate = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    convertTo24Hour(endHour, endMidday),
-    endMinutes
+    endTimeContainer.getHour(),
+    endTimeContainer.getMinute()
   );
 
   if (!isValidPeriod(startDate, intervalMinutes, endDate)) {
@@ -78,15 +112,14 @@ async function saveAlert() {
     return;
   }
 
-  let hasOneAlert = alertList.length == 0;
-  if (hasOneAlert) {
+  let isEmptyAlert = alertList.length == 0;
+  if (isEmptyAlert) {
     alertList.push(filteredItems);
     hideWarning();
 
     const timestamps = filteredItems.map((time) => time.getTime());
     showPreview(timestamps);
-
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
       times: timestamps,
     });
     chrome.runtime.sendMessage({
@@ -102,7 +135,7 @@ function isValidPeriod(startDate, intervalMinutes, endDate) {
 }
 //FIXME
 async function deleteAlert() {
-  await chrome.storage.sync.clear();
+  await chrome.storage.local.clear();
   chrome.runtime.sendMessage({
     type: "REMOVE_ALARMS",
   });
