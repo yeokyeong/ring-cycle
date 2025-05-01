@@ -2,36 +2,44 @@ chrome.runtime.onInstalled.addListener(() => {
   console.info("RingCycle successfully installed");
 });
 
-// onMessage
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  if (message.type === "SET_ALARMS") {
-    let result = await chrome.storage.sync.get("times");
-    const times = result.times;
-    try {
-      times.forEach((timestamp, index) => {
-        chrome.alarms.create(`ringAlarm_${timestamp}`, { when: timestamp });
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  } else if (message.type === "REMOVE_ALARMS") {
-    chrome.alarms.clearAll();
+chrome.runtime.onMessage.addListener(handleOnMessages);
+
+async function handleOnMessages(message) {
+  switch (message.type) {
+    case "SET_ALARMS":
+      let result = await chrome.storage.local.get("times");
+      const times = result.times;
+      try {
+        times.forEach((timestamp, index) => {
+          chrome.alarms.create(`ringAlarm_${timestamp}`, { when: timestamp });
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      break;
+    case "REMOVE_ALARMS":
+      chrome.alarms.clearAll();
+      break;
+    default:
+      console.warn(`Unexpected message type received: '${message.type}'.`);
   }
-});
+}
 
 //TODO : show next alarm time
 // onAlarm
 chrome.alarms.onAlarm.addListener((alarm) => {
-  playSound();
+  if (isSameTimeByMinute(alarm.scheduledTime, Date.now())) {
+    requestToOffScreen();
 
-  chrome.notifications.create({
-    type: "basic",
-    iconUrl: "./src/ring-cycle-logo_128.png",
-    title: "🔔 RingCycle 알람",
-    message: "설정된 시간이 되었어요!",
-    priority: 2,
-    silent: true,
-  });
+    chrome.notifications.create({
+      type: "basic",
+      iconUrl: "./src/ring-cycle-logo_128.png",
+      title: "🔔 RingCycle 알람",
+      message: "설정된 시간이 되었어요!",
+      priority: 2,
+      silent: true,
+    });
+  }
 });
 
 /**
@@ -39,17 +47,31 @@ chrome.alarms.onAlarm.addListener((alarm) => {
  * @param {string} source - path of the audio file
  * @param {number} volume - volume of the playback
  */
-async function playSound(source = "./src/ring-cycle-sound.mp3", volume = 1) {
+async function requestToOffScreen(
+  source = "./src/ring-cycle-sound.mp3",
+  volume = 0.3
+) {
   await createOffscreen();
-  await chrome.runtime.sendMessage({ play: { source, volume } });
+
+  await chrome.runtime.sendMessage({
+    type: "SET_SOUND",
+    target: "offscreen-doc",
+    play: { source, volume },
+  });
 }
 
-// Create the offscreen document if it doesn't already exist
 async function createOffscreen() {
   if (await chrome.offscreen.hasDocument()) return;
   await chrome.offscreen.createDocument({
     url: "offscreen.html",
     reasons: ["AUDIO_PLAYBACK"],
-    justification: "testing", // details for using the API
+    justification: "play sound for alert",
   });
+}
+
+function isSameTimeByMinute(timestamp1, timestamp2) {
+  const minute1 = Math.floor(timestamp1 / 60000); // 60,000 밀리초 = 1분
+  const minute2 = Math.floor(timestamp2 / 60000);
+
+  return minute1 === minute2;
 }
