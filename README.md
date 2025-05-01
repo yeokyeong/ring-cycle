@@ -41,7 +41,7 @@
 - HTML / CSS / JavaScript
 - [Bootstrap 5](https://getbootstrap.com/)
 - Chrome Extensions API (Manifest v3)
-  - `chrome.storage.sync`
+  - `chrome.storage.local`
   - `chrome.alarms`
   - `chrome.notifications`
   - `background service worker`
@@ -74,7 +74,7 @@ TBD
 
 ## 📝 TODO
 
-- [ ] 알림 사운드 옵션 추가
+- [x] 알림 사운드 옵션 추가
 - [ ] 다크모드 UI 지원
 - [ ] 로컬 시간대 자동 감지
 - [ ] 알림 히스토리 로그 저장
