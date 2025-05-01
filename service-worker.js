@@ -49,7 +49,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
  */
 async function requestToOffScreen(
   source = "./src/ring-cycle-sound.mp3",
-  volume = 0.3
+  volume = 0.7
 ) {
   await createOffscreen();
 
