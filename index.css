@@ -1,3 +1,15 @@
+html {
+  transform: scale(1);
+  transform-origin: 0 0;
+}
+
+.popup, html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+
 body {
     font-family: 'Pretendard', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f2f4f8;
@@ -6,11 +18,12 @@ body {
   }
 
   .popup {
-    width: 350px;
+    width: 360px;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
     background: white;
-    /* border-radius: 16px; */
-    /* box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); */
-    padding: 20px 18px;
+    padding: 14px 12px;
   }
 
   h3 {
@@ -24,7 +37,7 @@ body {
   h4 {
     font-size: 0.9rem;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: #555;
   }
 
@@ -62,8 +75,8 @@ body {
   .section-box {
     background-color: #fdf6e3;
     border-radius: 10px;
-    padding: 12px 16px;
-    margin-bottom: 1rem;
+    padding: 10px 14px;
+    margin-bottom: 0.8rem;
   }
 
   .input-group-sm {
@@ -73,7 +86,7 @@ body {
   .input-group-sm>.form-select,
   .input-group-sm>.input-group-text {
   
-      font-size: 13px;
+      font-size: 14px;
   
   } 
 
@@ -144,7 +157,7 @@ body {
   .text--preview {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    padding: 6px 10px;
+    padding: 4px 8px;
     font-size: 0.75rem;
     border-radius: 6px;
     margin-left: 8px;
