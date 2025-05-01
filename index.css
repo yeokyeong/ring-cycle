@@ -154,3 +154,91 @@ body {
   #warningText {
     font-size: 0.7rem;
   }
+
+  .flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .flex-container--col{
+    /* width: 100px; */
+    /* margin: 10px; */
+    text-align: center;
+  }
+  /* TUI Time Picker */
+.tui-timepicker {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.tui-timepicker-select {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 80px;
+  height: 110px;
+  overflow-y: scroll;
+}
+
+.tui-timepicker-select option {
+  padding: 6px 8px;
+  font-size: 0.85rem;
+  color: #444;
+  text-align: center;
+}
+
+.tui-timepicker-time-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: start;
+}
+
+/* 기본 컨테이너 요소 튀는 배경 제거 */
+#time-picker-start,
+#time-picker-end {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.tui-timepicker-btn {
+background-color: white;
+ }
+
+ /* .tui-timepicker input{
+  font-size: 13px !important;
+ } */
+
+ /* TUI Time Picker 스핀박스 버튼 높이 조절 */
+.tui-timepicker-btn-area {
+  height: auto !important;
+  padding: 15px 0 !important;
+  gap: 2px;
+}
+
+/* 스핀박스 input 크기 조정 */
+.tui-timepicker-spinbox-input {
+  font-size: 0.8rem !important;
+  height: 50px !important;
+  padding: 2px 4px !important;
+}
+
+/* 위/아래 버튼 크기 축소 */
+.tui-timepicker-btn {
+  padding: 2px !important;
+  height: 22px !important;
+  min-height: auto !important;
+}
+
+/* 아이콘 글자(▲, ▼ 텍스트 숨기기 또는 줄이기) */
+.tui-ico-t-btn {
+  font-size: 10px !important;
+}
+.tui-timepicker-spinbox{
+  width: 47px !important;
+}
